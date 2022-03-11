@@ -30,5 +30,7 @@ func main() {
 	tree.Insert(50)
 	tree.Insert(200)
 	tree.Insert(300)
+
+	fmt.Println(tree.Search(30))
 	fmt.Println(tree)
 }

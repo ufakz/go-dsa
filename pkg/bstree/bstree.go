@@ -27,4 +27,21 @@ func (n *Node) Insert(k int) {
 	}
 }
 
-//Search
+//Search(Recursive) takes in a key value
+//and return true if there is a node with that value
+func (n *Node) Search(k int) bool {
+	if n == nil {
+		return false
+	}
+
+	if n.Key < k {
+		//move right
+		return n.Right.Search(k)
+	} else if n.Key > k {
+		//move left
+		return n.Left.Search(k)
+	}
+	return true
+}
+
+//Delete
