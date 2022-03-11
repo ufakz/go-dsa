@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+
+	"github.com/farouqu/go-dsa/pkg/bstree"
 	"github.com/farouqu/go-dsa/pkg/graph"
 )
 
@@ -21,4 +24,11 @@ func main() {
 	g.AddEdge(5, 5)
 
 	g.Print()
+
+	//Test Binary Search Tree
+	tree := bstree.Node{Key: 100}
+	tree.Insert(50)
+	tree.Insert(200)
+	tree.Insert(300)
+	fmt.Println(tree)
 }
