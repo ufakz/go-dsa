@@ -13,7 +13,7 @@ type Vertex struct {
 	Adjacent []*Vertex
 }
 
-//AddVertex adds a Vertex to a Graph
+//AddVertex adds a Vertex to a Graph.
 func (g *Graph) AddVertex(k int) {
 	if contains(g.Vertices, k) {
 		err := fmt.Errorf("Vertex %v not added because it is an existing key", k)
@@ -23,7 +23,24 @@ func (g *Graph) AddVertex(k int) {
 	}
 }
 
-//AddEdge
+//AddEdge adds an edge to a Graph.
+//Directed graph - From, To
+func (g *Graph) AddEdge(from, to int) {
+	//get vertex
+	fromVertex := g.getVertex(from)
+	toVertex := g.getVertex(to)
+	//check error
+	if fromVertex == nil || toVertex == nil {
+		err := fmt.Errorf("invalid edge (%v---->%v)", from, to)
+		fmt.Println(err.Error())
+	} else if contains(fromVertex.Adjacent, to) {
+		err := fmt.Errorf("existing edge (%v---->%v)", from, to)
+		fmt.Println(err.Error())
+	} else {
+		//add edge
+		fromVertex.Adjacent = append(fromVertex.Adjacent, toVertex)
+	}
+}
 
 //Contains
 func contains(s []*Vertex, k int) bool {
@@ -35,7 +52,15 @@ func contains(s []*Vertex, k int) bool {
 	return false
 }
 
-//GetVertex
+//GetVertex returns a pointer to the Vertex with a key integer
+func (g *Graph) getVertex(k int) *Vertex {
+	for i, v := range g.Vertices {
+		if v.Key == k {
+			return g.Vertices[i]
+		}
+	}
+	return nil
+}
 
 //Print will print the adjency list for each vertex of the graph
 func (g *Graph) Print() {
